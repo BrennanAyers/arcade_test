@@ -47,4 +47,24 @@ router.post("/", function(req, res, next) {
     });
 });
 
+router.put("/:id", function(req, res, next) {
+  Game.findByPk(parseInt(req.params.id))
+  .then(game => {
+    game.update({
+          title: req.body.title,
+          price: req.body.price,
+          releaseYear: req.body.releaseYear,
+          active: req.body.active
+    })
+    .then(game => {
+      res.setHeader("Content-Type", "application/json");
+      res.status(201).send(JSON.stringify(game));
+    })
+    .catch(error => {
+      res.setHeader("Content-Type", "application/json");
+      res.status(500).send({ error });
+    });
+  });
+});
+
 module.exports = router;

@@ -73,7 +73,7 @@ router.delete("/:id", function(req, res, next) {
     game.destroy()
     .then(game => {
       res.setHeader("Content-Type", "application/json");
-      res.status(201).send(JSON.stringify({message: "Successfully Deleted Game"}));
+      res.status(204).send(JSON.stringify({message: "Successfully Deleted Game"}));
     })
     .catch(error => {
       res.setHeader("Content-Type", "application/json");
